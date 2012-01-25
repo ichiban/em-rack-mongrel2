@@ -1,14 +1,5 @@
-begin
-  require 'yajl'
-rescue LoadError
-  begin
-    require 'json'
-  rescue LoadError
-    raise "You need either the yajl-ruby or json gems present in order to parse JSON!"
-  end
-end
+require 'multi_json'
 
 module Mongrel2
-  JSON = Object.const_defined?('Yajl') ? ::Yajl::Parser : ::JSON
   VERSION = '0.1.0'
 end

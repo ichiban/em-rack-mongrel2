@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
   ## that are needed for an end user to actually USE your code.
   s.add_dependency('ffi', ['~> 1.0.0'])
   s.add_dependency('em-zeromq', ['~> 0.2.2'])
+  s.add_dependency('multi_json', ['~> 1.0.3'])
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
