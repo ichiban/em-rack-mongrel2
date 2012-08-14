@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe Mongrel2::Response do
@@ -25,5 +26,18 @@ describe Mongrel2::Response do
     @resp.should_receive(:send_msg).with(httpreq)
 
     @response.close(@req)
+  end
+
+  it 'should count bytesize of body as Content-Length' do
+    def @response.send_resp(uuid, conn_id, data)
+      # do nothing
+    end
+    @req.stub(:uuid).and_return(nil)
+    @req.stub(:conn_id).and_return(nil)
+    headers = {}
+    @response.send_http @req, 'abc', 200, headers
+    headers['Content-Length'].should eql('abc'.bytesize.to_s)
+    @response.send_http @req, 'あいう', 200, headers
+    headers['Content-Length'].should eql('あいう'.bytesize.to_s)
   end
 end

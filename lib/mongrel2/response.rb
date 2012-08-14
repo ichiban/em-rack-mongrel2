@@ -62,7 +62,7 @@ module Mongrel2
     end
 
     def build_http_response(body, status, headers)
-      headers['Content-Length'] = body.size.to_s
+      headers['Content-Length'] = body.bytesize.to_s
       headers = headers.map{ |k, v| '%s: %s' % [k,v] }.join("\r\n")
       "HTTP/1.1 #{status} #{StatusMessage[status.to_i]}\r\n#{headers}\r\n\r\n#{body}"
     end
