@@ -55,6 +55,7 @@ module Mongrel2
       }
       
       @env['SERVER_NAME'], @env['SERVER_PORT'] = headers['host'].split(':', 2)
+      @env['SERVER_PORT'] ||= '80'
       headers.each do |key, val|
         key = key.upcase.gsub('-', '_')
         unless %w[CONTENT_TYPE CONTENT_LENGTH].include?(key)

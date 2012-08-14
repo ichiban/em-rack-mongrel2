@@ -23,3 +23,6 @@ pkg
 *.rbc
 .rvmrc
 Gemfile.lock
+.rbenv-version
+config.sqlite
+

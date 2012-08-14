@@ -110,4 +110,53 @@ describe Mongrel2::Request do
     r = Mongrel2::Request.new(uuid, conn_id, path, headers, body, connection)
     r.body.should eql(io)
   end
+
+  it "should split host header into SERVER_NAME:SERVER_PORT" do
+    response = double("response")
+    uuid = double('uuid')
+    conn_id = double('conn_id')
+    path = double('path')
+    headers = {
+      "PATH" => "/",
+      "user-agent" => "curl/7.19.7 (universal-apple-darwin10.0) libcurl/7.19.7 OpenSSL/0.9.8l zlib/1.2.3",
+      "host" => "localhost:6767",
+      "accept" => "*/*",
+      "connection" => "close",
+      "x-forwarded-for" => "::1",
+      "METHOD" => "GET",
+      "VERSION" => "HTTP/1.1",
+      "URI" => "/",
+      "PATTERN" => "/"
+    }
+    body = double('body')
+    connection = double("connection")
+    r = Mongrel2::Request.new(uuid, conn_id, path, headers, body, connection)
+    env = r.env
+    env['SERVER_NAME'].should eql('localhost')
+    env['SERVER_PORT'].should eql('6767')
+  end
+
+  it "should assume SERVER_PORT = 80 if not given" do
+    response = double("response")
+    uuid = double('uuid')
+    conn_id = double('conn_id')
+    path = double('path')
+    headers = {
+      "PATH" => "/",
+      "user-agent" => "curl/7.19.7 (universal-apple-darwin10.0) libcurl/7.19.7 OpenSSL/0.9.8l zlib/1.2.3",
+      "host" => "example.com", # mongrel2 is running on port 80
+      "accept" => "*/*",
+      "connection" => "close",
+      "x-forwarded-for" => "::1",
+      "METHOD" => "GET",
+      "VERSION" => "HTTP/1.1",
+      "URI" => "/",
+      "PATTERN" => "/"
+    }
+    body = double('body')
+    connection = double("connection")
+    r = Mongrel2::Request.new(uuid, conn_id, path, headers, body, connection)
+    env = r.env
+    env['SERVER_PORT'].should eql('80')
+  end
 end
