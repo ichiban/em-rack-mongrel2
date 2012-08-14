@@ -10,5 +10,5 @@ require 'mongrel2/request'
 require 'mongrel2/response'
 
 module Mongrel2
-  VERSION = '0.2.0'
+  VERSION = '0.2.1'
 end
