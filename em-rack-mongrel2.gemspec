@@ -13,14 +13,14 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'em-rack-mongrel2'
-  s.version           = '0.2.2'
-  s.date              = '2012-08-16'
+  s.version           = '0.2.3'
+  s.date              = '2014-07-08'
   s.rubyforge_project = 'em-rack-mongrel2'
 
   ## Make sure your summary is short. The description may be as long
   ## as you like.
   s.summary     = %Q{A Mongrel2 Rack handler with EventMachine.}
-  s.description = %Q{A Rack handler for the Mongrel2 web server with EventMachine support, by Zed Shaw. http://mongrel2.org/}
+  s.description = %Q{A Rack handler for the Mongrel2 web server with EventMachine support}
 
   ## List the primary authors. If there are a bunch of authors, it's probably
   ## better to set the email to an email list or something. If you don't have
